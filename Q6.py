@@ -128,6 +128,31 @@ class Puzzle():
     except:
       print("Puzzle not loaded")
 
+
+    def SavePuzzle(self):
+      # with open(file_name, "m") as file:
+      #     ...
+
+      fileName = str(input("Save file as: "))+".txt"
+      file = open(fileName, "w")
+
+      file.write(f"{len(self.__AllowedSymbols)}\n")
+      for x in self.__AllowedSymbols:
+          file.write(f"{x}\n")
+
+      file.write(f"{len(self.__AllowedPatterns)}\n")
+      for x in self.__AllowedPatterns:
+          file.write(f"{x.GetSymbol()}, {x.GetPatternSequence()}\n")
+
+      file.write(f"{self.__GridSize}\n")
+      for cell in self.__Grid:
+          file.write(f"{cell.GetSaveData()}\n")
+
+      file.write(f"{self.__Score}\n")
+      file.write(f"{self.__SymbolsLeft}\n")
+  # CHANGES END HERE
+
+
   def AttemptPuzzle(self):
     Finished = False
     while not Finished:
@@ -284,6 +309,8 @@ class Puzzle():
       if (Count + 1) % self.__GridSize == 0:
         print("|")
         print(self.__CreateHorizontalLine())
+
+
 
 
 class Pattern():
